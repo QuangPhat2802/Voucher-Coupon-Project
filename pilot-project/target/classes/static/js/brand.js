@@ -117,15 +117,29 @@ $(document).ready(function(){
 	});
 
 	// Submit delete brand
-	$("#deleteSubmitBtn").on('click' , function() {
+//	$("#deleteSubmitBtn").on('click', function() {
+//		$.ajax({
+//			url : "/brand/api/delete/" + $(this).attr("data-id"),
+//			type : 'DELETE',
+//			dataType : 'json',
+//			contentType : 'application/json',
+//			success : function(responseData) {
+//				$('#confirmDeleteModal').modal('hide');
+//				showNotification(responseData.responseCode == 100, responseData.responseMsg);
+//				findBrands(1);
+//			}
+//		});
+//	});
+	$("#deleteSubmitBtn").on('click', function() {
 		$.ajax({
-			url : "/brand/api/delete/" + $(this).attr("data-id"),
-			type : 'DELETE',
-			dataType : 'json',
-			contentType : 'application/json',
-			success : function(responseData) {
+			url: "/brand/api/delete/" + $(this).attr("data-id"),
+			type: 'DELETE',
+			dataType: 'json',
+			contentType: 'application/json',
+			success: function(responseData) {
 				$('#confirmDeleteModal').modal('hide');
 				showNotification(responseData.responseCode == 100, responseData.responseMsg);
+				
 				findBrands(1);
 			}
 		});
@@ -215,10 +229,10 @@ function renderBrandsTable(brandList) {
 	$("#brandInfoTable tbody").empty();
 	$.each(brandList, function(key, value) {
 		rowHTML = "<tr>"
-				+		"<td>" + value.brandId + "</td>"
-				+ 		"<td>" + value.brandName +"</td>" 
+				+		"<td class='text-center'>" + value.brandId + "</td>"
+				+ 		"<td class='text-center'>" + value.brandName +"</td>" 
 				+		"<td class='text-center'><a href='" + value.logo + "' data-toggle='lightbox' data-max-width='1000'><img class='img-fluid' src='" + value.logo + "'></td>"
-				+		"<td>" + value.description + "</td>"
+				+		"<td class='text-center'>" + value.description + "</td>"
 				+		"<td class = 'action-btns'>"
 				+			"<a class='edit-btn' data-id='" + value.brandId +"'><i class='fas fa-edit'></i></a> | <a class='delete-btn' data-name='" + value.brandName + "' data-id='" + value.brandId + "'><i class='fas fa-trash-alt'></i></a>"		
 				+		"</td>" 

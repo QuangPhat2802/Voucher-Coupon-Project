@@ -64,25 +64,22 @@
 				<a class="btn btn-dark reset-btn" id="resetPage">Reset</a>
 			</div>
 		</div>
-			<div class="brand-item">
-					<ul class="sb_dropdown"  >
-	    				<c:forEach items="${brandList}" var="brand">
-		    				<li class="logo-item" id="check-img">
-			    				<input class="check" type="checkbox" id="${brand.brandId}" value="${brand.brandId}" name="brand.brandName" >
-		    					<label for="${brand.brandId}"  class="label-logo">
-		    						<img id="img-brand" src="${brand.logo}">
-		    					</label>
-		    				</li>	
-	    				</c:forEach>  
-	    				               
-					</ul>
-					<div id="output">
-						<a class="out" href="#"></a>
-					</div>
-			</div>
+		<div class="brand-item">
+			<ul class="sb_dropdown"  >
+	    		<c:forEach items="${brandList}" var="brand">
+		    		<li class="logo-item" id="check-img">
+			    		<input class="check" type="checkbox" id="${brand.brandId}" value="${brand.brandId}" name="brand.brandName" >
+		    			<label for="${brand.brandId}"  class="label-logo">
+		    				<img id="img-brand" src="${brand.logo}">
+		    			</label>
+		    		</li>	
+	    		</c:forEach>  
+	    		<a class="show-more" >Show more</a>
+				<a class="hidden-item d-none" >Hidden</a>              
+			</ul>			
+		</div>
 	</div>
-	
-		<table class="table table-bordered" id="productInfoTable">
+		<table class="table table-bordered table-hover" id="productInfoTable">
 			<thead>
 				<tr class="text-center">
 					<th scope="col">No</th>
@@ -173,11 +170,20 @@
 						<button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancel</button>
 						<button type="button" class="btn btn-primary" id="saveProduct" >Save</button>
 					</div>
+						<div class="loading" id="divMessage">
+							<p class="cssld">
+							<span class="cssspan">
+								<span class="dot"></span>
+								<span class="dot"></span>
+								<span class="dot"></span>
+							</span>
+							</p>
+						</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	
+
 	<!--  modal delete -->
 		<div class="modal fade" id="deleteModal" >
 		<div class="modal-dialog modal-dialog-centered" role="document">
@@ -189,7 +195,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<p>Do you want to delete <b class="product-name"></b>?</p>
+					<p>Do you want to delete <b id="product-name"></b>?</p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

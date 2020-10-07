@@ -81,7 +81,7 @@ public class ProductServiceImpl implements IProductService{
 		String responseMsg = StringUtils.EMPTY;
 		Map<String, Object> rpMap = new HashMap<>();
 		try {
-		Sort sort = Sort.by(Sort.Direction.ASC, "productName");
+		Sort sort = Sort.by(Sort.Direction.DESC, "productId");
 		Pageable pageable = PageRequest.of(pageNumber - 1, Constants.PAGE_SIZE,sort);
 		Page<ProductEntity> pages = productDao.findAll(pageable);
 		rpMap.put("productList", pages.getContent());
@@ -169,7 +169,7 @@ public class ProductServiceImpl implements IProductService{
 		
 		Map<String, Object> rpMap = new HashMap<>();
 		try {
-			Sort sort = Sort.by(Sort.Direction.ASC,"productName");
+			Sort sort = Sort.by(Sort.Direction.DESC,"productId");
 			Pageable pageable = PageRequest.of(pageNumber - 1, Constants.PAGE_SIZE, sort);
 			Page<ProductEntity> pages = productDao.findAll(ProductJpaSpecs.getSeachProductBySpec(search),pageable);
 			rpMap.put("productList", pages.getContent());
@@ -184,6 +184,9 @@ public class ProductServiceImpl implements IProductService{
 		return new ResponseDataModel(responseCode, responseMsg, rpMap);
 		
 	}
+
+
+
 
 
 

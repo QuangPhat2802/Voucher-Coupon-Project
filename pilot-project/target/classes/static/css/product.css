@@ -51,7 +51,7 @@ thead {
 }
 
 .main-search .search-product {
-		border: 1px solid;
+	border: 1px solid;
 	height: 34px;
 	width: 200px;
 	/* position: relative; */
@@ -154,11 +154,27 @@ textarea.form-control {
 	margin-bottom: 0px;
 	border-radius: 0px;
 	font-weight: 500;
+	cursor: pointer;
+    text-align: center;
+    padding-top: 9px;
+ 
 }
 
-
+.hidden-item{
+	border: 1px solid #cecece;
+    width: 135.5px;
+    height: 48px;
+	margin-bottom: 0px;
+	border-radius: 0px;
+	font-weight: 500;
+	cursor: pointer;
+   text-align: center;
+   padding-top: 9px;
+   
+}
+/*
 .show-more a{
-   /* border: 1px solid #eee; */
+
     line-height: 40px;
     position: relative;
     margin: 0 0 -1px 20px;
@@ -166,7 +182,7 @@ textarea.form-control {
     text-align: center;
     cursor: pointer;
 }
-
+*/
 
 
 input[type="checkbox"][id^="myCheckbox"] {
@@ -188,14 +204,7 @@ input[type="checkbox"][id^="myCheckbox"] {
   text-align: center;
 }
 
-/*
-:checked + .label-logo {
-  border-color: #ddd;
-  border-radius: 100%;
-  border: 1px solid grey;
-   background-color: blue;
-}
-*/
+
 :checked + .logo-item:before {
   background-color: grey;
 }
@@ -206,8 +215,45 @@ input[type="checkbox"][id^="myCheckbox"] {
 	
 }
 .logo-item:hover{
-	-ms-transform: scale(1.2); /* IE 9 */
-   	-webkit-transform: scale(1.2); /* Safari 3-8 */
+	-ms-transform: scale(1.2);
+   	-webkit-transform: scale(1.2); 
   	transform: scale(1.02); 
+  	
 }
+
+
+/* Loading*/
+
+.loading{
+	display: none;
+	position: fixed;
+    left:0;
+    right:0;
+    
 }
+.dot{
+	height: 13px;
+	width: 13px;
+	background-color: #288ad6;
+ 	border-radius: 50%;
+    display: inline-block;
+    border: 1px solid #288ad6;
+  	animation-name: example;
+  	animation-duration: 2s;  
+  	opacity: 1;  
+}
+
+@keyframes example {
+  from {background-color: white;}
+  to {background-color: blue;}
+  
+}
+.cssspan {
+	
+	display: block;
+	 left:0;
+    right:0;
+	
+} 
+     
+

@@ -23,6 +23,7 @@ $(document).ready(function(){
 		var $parent = $(this).parent();
 		if (file) {
 			fileUrl = url.createObjectURL(file);
+			$parent.find('.error-message-invalid[id$="-error"]').remove();
 			$parent.find(".error-message-invalid").removeClass("error-message-invalid");
 		} else {
 			var oldImagePath = $parent.find(".old-img").val();
@@ -56,6 +57,7 @@ function  showModalWithCustomizedTitle($selectedModal, title) {
 function resetForm($formElement) {
 	$formElement[0].reset();
 	$formElement.find("input[type*='file']").val("");
+	$formElement.validate().destroy();
 	$formElement.find(".error-message-invalid").remove();
 	$formElement.find("img").attr('src','');
 }
@@ -88,9 +90,12 @@ function showNotification(isSuccess, message) {
 	}
 }
 
+
+
 function showMsgOnField($element, message, isSuccessMsg) {
 
 	var className = isSuccessMsg ? "alert-info" : "error-message-invalid";
 	$element.find(".form-msg").remove();
 	$element.parent().append("<div class='" + className + " form-msg'>" + message + "</div>");
+
 }

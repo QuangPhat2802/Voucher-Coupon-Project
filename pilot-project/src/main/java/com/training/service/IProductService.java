@@ -22,5 +22,7 @@ public interface IProductService {
 	
 	ResponseDataModel deleteProduct(Long productId);
 	
+	
+	
 	ResponseDataModel searchByNameAndPrice(Map<String, Object> search, int pageNumber);
 }

@@ -39,7 +39,7 @@
 				</div>	
 			</div>
 		</div>
-		<table class="table table-bordered" id="brandInfoTable">
+		<table class="table table-bordered table-hover" id="brandInfoTable">
 			<thead>
 				<tr class="text-center">
 					<th scope="col">#</th>
@@ -118,7 +118,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<p>Do you want to delete <b class="brand-name"></b>?</p>
+					<p>Do you want to delete <b id="deletedBrandName"></b>?</p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

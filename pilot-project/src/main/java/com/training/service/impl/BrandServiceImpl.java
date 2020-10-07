@@ -1,7 +1,6 @@
 package com.training.service.impl;
 
-import java.io.IOException;
-import java.util.ArrayList;
+//import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -40,52 +38,52 @@ public class BrandServiceImpl implements IBrandService {
 	@Autowired
 	IBrandDao brandDao;
 
-	@Override
-	public BrandEntity add(BrandEntity brandEntity) {
+//	@Override
+//	public BrandEntity add(BrandEntity brandEntity) {
+//
+//		try {
+//			String imagePath = FileHelper.addNewFile(brandLogoFolderPath, brandEntity.getLogoFiles());
+//			brandEntity.setLogo(imagePath);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		return brandDao.saveAndFlush(brandEntity);
+//	}
 
-		try {
-			String imagePath = FileHelper.addNewFile(brandLogoFolderPath, brandEntity.getLogoFiles());
-			brandEntity.setLogo(imagePath);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return brandDao.saveAndFlush(brandEntity);
-	}
+//	@Override
+//	public BrandEntity update(BrandEntity brandEntity) {
+//
+//		try {
+//			if (brandEntity.getLogoFiles()[0].getSize() > 0) {
+//
+//				String imagePath = FileHelper.editFile(brandLogoFolderPath, brandEntity.getLogoFiles(),
+//						brandEntity.getLogo());
+//				brandEntity.setLogo(imagePath);
+//			}
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return brandDao.saveAndFlush(brandEntity);
+//	}
 
-	@Override
-	public BrandEntity update(BrandEntity brandEntity) {
-
-		try {
-			if (brandEntity.getLogoFiles()[0].getSize() > 0) {
-
-				String imagePath = FileHelper.editFile(brandLogoFolderPath, brandEntity.getLogoFiles(),
-						brandEntity.getLogo());
-				brandEntity.setLogo(imagePath);
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return brandDao.saveAndFlush(brandEntity);
-	}
-
-	@Override
-	public ResponseDataModel delete(Long brandId) {
-
-		BrandEntity brandEntity = brandDao.findByBrandId(brandId);
-		if (brandEntity != null) {
-			brandDao.deleteById(brandId);
-			brandDao.flush();
-
-			try {
-				// Remove logo of brand from store folder
-				FileHelper.deleteFile(brandEntity.getLogo());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return null;
-	}
+//	@Override
+//	public ResponseDataModel delete(Long brandId) {
+//
+//		BrandEntity brandEntity = brandDao.findByBrandId(brandId);
+//		if (brandEntity != null) {
+//			brandDao.deleteById(brandId);
+//			brandDao.flush();
+//
+//			try {
+//				// Remove logo of brand from store folder
+//				FileHelper.deleteFile(brandEntity.getLogo());
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		return null;
+//	}
 
 	@Override
 	public BrandEntity findByBrandId(Long brandId) {
@@ -129,7 +127,7 @@ public class BrandServiceImpl implements IBrandService {
 				responseMsg = "Brand is added successfully";
 				responseCode = Constants.RESULT_CD_SUCCESS;
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			responseMsg = "Error when adding brand";
 			LOGGER.error("Error when get all brand: ", e);
 		}
@@ -142,7 +140,7 @@ public class BrandServiceImpl implements IBrandService {
 		String responseMsg = StringUtils.EMPTY;
 		Map<String, Object> responseMap = new HashMap<>();
 		try {
-			Sort sortInfo = Sort.by(Sort.Direction.ASC, "brandName");
+			Sort sortInfo = Sort.by(Sort.Direction.DESC, "brandId");
 			Pageable pageable = PageRequest.of(pageNumber - 1, Constants.PAGE_SIZE, sortInfo);
 			Page<BrandEntity> brandEntitiesPage = brandDao.findAll(pageable);
 			responseMap.put("brandsList", brandEntitiesPage.getContent());
@@ -206,25 +204,31 @@ public class BrandServiceImpl implements IBrandService {
 		int responseCode = Constants.RESULT_CD_FAIL;
 		String responseMsg = StringUtils.EMPTY;
 		BrandEntity brandEntity = brandDao.findByBrandId(brandId);
+		Long productNumber = brandDao.numberProduct(brandId);
 		try {
-			if (brandEntity != null) {
+		if (productNumber == 0) {
+			
 				brandDao.deleteById(brandId);
 				brandDao.flush();
 				FileHelper.deleteFile(brandEntity.getLogo());
 				responseMsg = "Brand is deleted successfully";
 				responseCode = Constants.RESULT_CD_SUCCESS;
+
+			}else {
+				responseMsg = "You cannot delete this brand";
 			}
-		} catch (Exception e) {
-			responseMsg = "Error when deleting brand";
-			LOGGER.error("Error when delete brand: ", e);
-		}
+			} catch (Exception e) {
+				responseMsg = "Error when deleting brand";
+				LOGGER.error("Error when delete brand: ", e);
+			}
+		
+			
 		return new ResponseDataModel(responseCode, responseMsg);
 	
 	}
 	
 	@Override
 	public BrandEntity findByBrandName(String brandName) {
-		// TODO Auto-generated method stub
 		return brandDao.findByBrandName(brandName);
 	}
 
@@ -232,11 +236,9 @@ public class BrandServiceImpl implements IBrandService {
 	public ResponseDataModel search(int pageNumber, String keyword) {
 		int responseCode = Constants.RESULT_CD_FAIL;
 		String responseMsg = StringUtils.EMPTY;
-		
-		//List<BrandEntity> listBrand = brandDao.findByBrandNameLike("%" + keyword + "%" );
 		Map<String, Object> rpMap = new HashMap<>();
 		try {
-			Sort sort = Sort.by(Direction.ASC, "brandName");
+			Sort sort = Sort.by(Direction.DESC, "brandId");
 			Pageable pageable = PageRequest.of(pageNumber -1, Constants.PAGE_SIZE,sort);
 			Page<BrandEntity> brandEntitiesPage = brandDao.findByBrandNameLike("%" + keyword + "%",pageable);
 			rpMap.put("brandsList", brandEntitiesPage.getContent());

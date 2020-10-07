@@ -21,7 +21,4 @@ public class UserServiceImpl implements IUserService{
 		}
 		return userEntity;
 	}
-	//asdnkjashdjasdjasbdahsbdhasbhhbhccccccclls
-//asddddddddddddn//
-	//sdsdmkhuh
 }
