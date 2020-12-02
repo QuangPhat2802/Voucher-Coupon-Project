@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -62,9 +63,8 @@ public class VoucherController {
 		List<VoucherEntity> list = voucherService.searchCodeBySdt(sdt, minPrice);
 		List<DonHangEntity> listDonHang = donHangService.getListDonHang();
 		model.addAttribute("listDonHang", listDonHang);
-		if (list != null) {
 			model.addAttribute("list", list);
-		}
+		
 		return "admin";
 	}
 
@@ -81,6 +81,7 @@ public class VoucherController {
 		model.addAttribute("code", voucherService.findByCode(code));
 		return "update";
 	}
+
 	/**
 	 * 
 	 * @param voucherEntity

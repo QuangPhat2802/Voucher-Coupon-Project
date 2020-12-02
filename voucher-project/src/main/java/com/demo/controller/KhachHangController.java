@@ -86,9 +86,9 @@ public class KhachHangController {
 	@PostMapping(value = "/add")
 	public String addDonHang(@Param("sdt") int sdt, @Param("minPrice") double minPrice, @Param("code") String code,
 			KhachHangEntity khachHangEntity, VoucherEntity voucherEntity, DonHangEntity donHangEntity) {
-
-		DonHangEntity dh = donHangService.addDonHang(donHangEntity);
-
+		
+		DonHangEntity DH = new DonHangEntity(donHangEntity.getIdDonHang(), khachHangEntity,voucherEntity,minPrice);
+		donHangService.addDonHang(DH);
 		return "add";
 	}
 

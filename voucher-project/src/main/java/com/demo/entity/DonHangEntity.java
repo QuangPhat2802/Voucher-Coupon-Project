@@ -38,11 +38,19 @@ public class DonHangEntity {
 		return idDonHang;
 	}
 
+	
+
+	public DonHangEntity(int idDonHang, KhachHangEntity khachHangEntity, VoucherEntity voucherEntity, double minPrice) {
+		this.idDonHang = idDonHang;
+		this.khachHangEntity = khachHangEntity;
+		this.voucherEntity = voucherEntity;
+		this.minPrice = minPrice;
+	}
+
 	public void setIdDonHang(int idDonHang) {
 		this.idDonHang = idDonHang;
 	}
 
-	
 
 	public double getMinPrice() {
 		return minPrice;
