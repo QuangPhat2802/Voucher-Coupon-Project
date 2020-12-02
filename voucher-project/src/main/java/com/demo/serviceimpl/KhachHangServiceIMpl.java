@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.demo.dao.KhachHangDao;
 import com.demo.entity.KhachHangEntity;
+import com.demo.entity.VoucherEntity;
 import com.demo.service.KhachHangService;
 
+@Transactional
 @Service
 public class KhachHangServiceIMpl implements KhachHangService{
 
@@ -16,9 +19,9 @@ public class KhachHangServiceIMpl implements KhachHangService{
 	KhachHangDao khachHangDao;
 
 	@Override
-	public List<KhachHangEntity> searchKhachHang(int sdt) {
+	public List<VoucherEntity> searchKhachHang(int sdt) {
 		// TODO Auto-generated method stub
-		return khachHangDao.findBySdtLike(sdt);
+		return khachHangDao.findBySdt(sdt);
 	}
 
 	@Override
@@ -26,6 +29,12 @@ public class KhachHangServiceIMpl implements KhachHangService{
 		// TODO Auto-generated method stub
 		return khachHangDao.findAll();
 	}
+
+//	@Override
+//	public List<VoucherEntity> findByMinPriceAndStatus(int status, double minPrice) {
+//		
+//		return khachHangDao.findByMinPriceAndStatus(status, minPrice);
+//	}
 
 
 }

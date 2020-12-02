@@ -12,14 +12,13 @@
 <body>
 	
 	<br>
+	
 
 	<form action="/KH/sdt" method="get">
 	<p>xác minh số điện thoại</p>
 		<input type="text" name="sdt"/>
 		<input type="submit" name="sdt" value="check"/>
-	
 		<table>
-		
 		<c:forEach var="list" items="${listKH}">
 			<tr>
 				<td>${list.sdt}</td>

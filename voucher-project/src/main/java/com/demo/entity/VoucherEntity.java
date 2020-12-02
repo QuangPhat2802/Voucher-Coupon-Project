@@ -6,11 +6,14 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "voucher_project")
@@ -20,36 +23,42 @@ public class VoucherEntity {
 	@Column(name = "code" , nullable = false)
 	private String code;
 	
-	@Column(name = "name" , nullable = false)
+	@Column(name = "name" )
 	private String name;
 	
-	@Column(name = "description" , nullable = false)
+	@Column(name = "description" )
 	private String description;
 	
-	@Column(name = "quantity" , nullable = false)
+	@Column(name = "quantity" )
 	private int quantity;
 	
-	@Column(name = "discount" , nullable = false)
+	@Column(name = "discount" )
 	private int discount;
 	
-	@Column(name = "startDate" , nullable = false)
+	@Column(name = "startDate" )
 	private Date startDate;
 	
-	@Column(name = "endDate" , nullable = false)
+	@Column(name = "endDate" )
 	private Date endDate;
 	
-	@Column(name = "status" , nullable = false)
+	@Column(name = "status" )
 	private int status;
 	
-//	@JoinColumn(name = "code", referencedColumnName = "code")
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	private KhachHangEntity khachhangEntity;
+	@Column(name = "minPrice")
+	private double minPrice;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "voucherEntity", fetch = FetchType.LAZY)
+	private Set<DonHangEntity> donHangEntity;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "don_hang", joinColumns= {@JoinColumn(name = "code", referencedColumnName="code")},
-	inverseJoinColumns = {@JoinColumn(name = "sdt",referencedColumnName="sdt")})
-	private Set<KhachHangEntity> khachhangEntity;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "sdt", referencedColumnName = "sdt")
+	private KhachHangEntity khachHangEntity;
 	
+//	@OneToOne( fetch = FetchType.LAZY)
+//	@JoinColumn(name="code")
+//	private DonHangEntity donHangEntity;
+
 	
 	public VoucherEntity() {
 		// TODO Auto-generated constructor stub
@@ -136,23 +145,37 @@ public class VoucherEntity {
 	}
 
 
-	public Set<KhachHangEntity> getKhachhangEntity() {
-		return khachhangEntity;
+	public Set<DonHangEntity> getDonHangEntity() {
+		return donHangEntity;
 	}
 
 
-	public void setKhachhangEntity(Set<KhachHangEntity> khachhangEntity) {
-		this.khachhangEntity = khachhangEntity;
+	public void setDonHangEntity(Set<DonHangEntity> donHangEntity) {
+		this.donHangEntity = donHangEntity;
 	}
 
 
-//	public KhachHangEntity getKhachhangEntity() {
-//		return khachhangEntity;
-//	}
-//
-//
-//	public void setKhachhangEntity(KhachHangEntity khachhangEntity) {
-//		this.khachhangEntity = khachhangEntity;
-//	}
+	public double getMinPrice() {
+		return minPrice;
+	}
+
+
+
+	public void setMinPrice(double minPrice) {
+		this.minPrice = minPrice;
+	}
+
+
+	public KhachHangEntity getKhachHangEntity() {
+		return khachHangEntity;
+	}
+
+
+	public void setKhachHangEntity(KhachHangEntity khachHangEntity) {
+		this.khachHangEntity = khachHangEntity;
+	}
+
+
+
 	
 }

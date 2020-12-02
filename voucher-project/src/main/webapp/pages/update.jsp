@@ -9,47 +9,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/voucher/addSdt" method="post">
-	<table>
-		<tr>
-			<th>code</th>
-			<th>name</th>
-			<th>des</th>
-			<th>quantity</th>
-			<th>discount</th>
-			<th>start date</th>
-			<th>end date</th>
-			<th>status</th>
-			<th>sdt</th>
-		</tr>
-		<c:forEach var="list" items="${list}">
-		<tr>
-			<td> ${list.code}</td>
-			<td>${list.name}</td>
-			<td>${list.description}</td>
-			<td>${list.quantity}</td>
-			<td>${list.discount}</td>
-			<td>${list.startDate}</td>
-			<td>${list.endDate}</td>
-			
-			<td> <c:if test="${list.status == 0}">
-					<c:out value="chua su dung"></c:out>
-				</c:if>
-				<c:if test="${list.status == 1}">
-					<c:out value="da su dung"></c:out>
-				</c:if> 
-			</td>
-			<td>
-			<select id="sdt" name="voucherEntity.sdt">
-			 	<c:forEach var="list" items="${listKH}">
-					<option value="${list.id}">${list.sdt}</option>
-				</c:forEach> 
-			</select>
-			</td>
-			<input type="submit" name="sdt" value="add"/>
-		</tr>
-		</c:forEach>
-	</table>
-</form>
+	
+	<form action="/admin/sdt" method="post">
+
+		<input type="text" id="code" name="code" value="${code.code}"  disable/><br><br>
+		<input type="text" id="name" name="name" value="${code.name}" readonly/><br><br>
+		<input type="text" id="description" name="description" value="${code.description}" readonly/><br><br>
+		<input type="text" id="quantity" name="quantity" value="${code.quantity}" readonly/><br><br>
+		<input type="text" id="discount" name="discount" value="${code.discount}" readonly/><br><br>
+		<input type="text" id="minPrice" name="minPrice" value="${code.minPrice}" readonly/><br><br>
+		<input type="text" id="startDate" name="startDate" value="${code.startDate}" readonly/><br><br>
+		<input type="text" id="endDate" name="endDate" value="${code.endDate}" readonly/><br><br>
+		<input type="text" id="status" name="status" value="${code.status}" readonly/><br><br>
+		<input type="text" id="khachHangEntity.sdt" name="khachHangEntity.sdt" />
+		<input type="submit" value="add"/>
+	</form>
 </body>
 </html>

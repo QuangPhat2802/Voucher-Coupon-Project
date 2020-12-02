@@ -11,12 +11,6 @@
 </head>
 <body>
 	<form action="/KH/sdt" method="post">
-		<c:forEach var="list" items="${listKH}">
-			
-				<p>${list.sdt}
-				${list.name}</p>
-			
-		</c:forEach>
 	<table>
 		<tr>
 			<th>code</th>
@@ -24,22 +18,21 @@
 			<th>des</th>
 			<th>quantity</th>
 			<th>discount</th>
+			<th>minPrice</th>
 			<th>start date</th>
 			<th>end date</th>
 			<th>status</th>
-			
 		</tr>
-		<c:forEach var="list" items="${listVoucher}">
+		<c:forEach var="list" items="${listKH}">
 		<tr>
 			<td>${list.code}</td>
 			<td>${list.name}</td>
 			<td>${list.description}</td>
 			<td>${list.quantity}</td>
 			<td>${list.discount}</td>
+			<td>${list.minPrice}</td>
 			<td>${list.startDate}</td>
 			<td>${list.endDate}</td>
-			
-			
 			<td> <c:if test="${list.status == 0}">
 					<c:out value="Có thể sử dụng"></c:out>
 				</c:if>
@@ -47,29 +40,22 @@
 					<c:out value="Đã sử dụng"></c:out>
 				</c:if> 
 			</td>
-		
-			
 		</tr>
 		</c:forEach>
 	</table>
 	<br>
-	<h2>Nhap gia tri don hang</h2>
-
-	
-		<input type="text" name="giaDonHang" /> <br><br>
-		<select id="code" name="voucherEntity.code" >
-				<c:forEach var="list" items="${listStatus}">
+	<input type="text" id="sdt" name="sdt" value="${khachHangEntity.sdt}" readonly />
+	<h3>Nhap gia tri don hang</h3> 
+		<input type="text"  id="minPrice"  name="minPrice" value="${minPrice}"/> <br><br>
+		<input type="submit" name="check" value="check" /><br><br>
+		<select id="code" name="code" >
+				<c:forEach var="list" items="${listVoucher}">
 					<option value="${list.code}">${list.description}</option>
 				</c:forEach> 
 		</select>
 		<br>
 		<br>
-		<input type="submit"
-			name="gia" value="check" />
-		<table>
-
-		</table>
+	
 	</form>
-
 </body>
 </html>

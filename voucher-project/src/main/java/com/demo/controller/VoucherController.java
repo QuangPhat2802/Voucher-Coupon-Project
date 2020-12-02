@@ -13,54 +13,83 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.demo.entity.DonHangEntity;
+import com.demo.entity.KhachHangEntity;
 import com.demo.entity.VoucherEntity;
+import com.demo.service.DonHangService;
 import com.demo.service.KhachHangService;
 import com.demo.service.VoucherService;
 
 @Controller
-@RequestMapping(value = "/voucher")
+@RequestMapping(value = "/admin")
 public class VoucherController {
 
 	@Autowired
+	DonHangService donHangService;
+	@Autowired
 	VoucherService voucherService;
-	
+
 	@Autowired
 	KhachHangService khachHangService;
-//	@GetMapping(value = "/addSdt")
-//	public String initKhachHang(Model model) {
-//		
-//		model.addAttribute("listKH",khachHangService.getAll());
-//		return "update" ; 
-//	}
-	
+
+	/**
+	 * 
+	 * @param voucherEntity
+	 * @param model
+	 * @return
+	 */
 	@GetMapping
-	public String initPage(Model model) {
-		
+	public String initPage(VoucherEntity voucherEntity, Model model) {
 		model.addAttribute("listVoucher", voucherService.getAll());
-		return "index" ; 
+		List<DonHangEntity> listDonHang = donHangService.getListDonHang();
+		model.addAttribute("listDonHang", listDonHang);
+		return "admin";
 	}
+
+	/**
+	 * 
+	 * @param model
+	 * @param code
+	 * @param minPrice
+	 * @param voucherEntity
+	 * @param rd
+	 * @return
+	 */
 	@GetMapping("/code")
-	public String check(Model model, @Param("code") String code) {
+	public String check(Model model, @Param("sdt") int sdt, @Param("minPrice") double minPrice,
+			VoucherEntity voucherEntity, RedirectAttributes rd) {
 		model.addAttribute("listVoucher", voucherService.getAll());
-		List<VoucherEntity> list = voucherService.searchCode(code);
-		model.addAttribute("list" , list);
-		
-		return "index";
+		List<VoucherEntity> list = voucherService.searchCodeBySdt(sdt, minPrice);
+		List<DonHangEntity> listDonHang = donHangService.getListDonHang();
+		model.addAttribute("listDonHang", listDonHang);
+		if (list != null) {
+			model.addAttribute("list", list);
+		}
+		return "admin";
 	}
-	
-	@GetMapping(value = "/addSdt")
-	public String addSdt(@RequestParam("code") String code, Model model) {
-		model.addAttribute("listKH",khachHangService.getAll());
-		model.addAttribute("list", voucherService.searchCode(code));
+
+	/**
+	 * 
+	 * @param code
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/sdt")
+	public String initAddSdt(@RequestParam(name = "code") String code, Model model) {
+		List<KhachHangEntity> listKhachHang = khachHangService.getAll();
+		model.addAttribute("listKhachHang", listKhachHang);
+		model.addAttribute("code", voucherService.findByCode(code));
 		return "update";
 	}
-	
-	
-	@PostMapping(value = {"/addSdt"})
-	public String addSdt(@ModelAttribute VoucherEntity voucherEntity, Model model,RedirectAttributes rd) {
-		VoucherEntity voucherAdd = voucherService.addSdt(voucherEntity);
-		
-		return "redirect:/voucher";
+	/**
+	 * 
+	 * @param voucherEntity
+	 * @param model
+	 * @return
+	 */
+	@PostMapping("/sdt")
+	public String addSdt(@ModelAttribute VoucherEntity voucherEntity, Model model, RedirectAttributes rd) {
+		VoucherEntity update = voucherService.addSdt(voucherEntity);
+		return "redirect:/admin";
 	}
-	
 }
