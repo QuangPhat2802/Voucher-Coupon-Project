@@ -8,16 +8,12 @@ public interface VoucherService {
 
 	List<VoucherEntity> getAll();
 
-	List<VoucherEntity> searchCodeBySdt(int sdt, double minPrice);
+	List<VoucherEntity> findVoucherCodeByPhone(int phone, double minPrice);
 
-	VoucherEntity addSdt(VoucherEntity voucherEntity);
+	VoucherEntity addPhone(VoucherEntity voucherEntity);
 
-	List<VoucherEntity> searchStatus(int status);
+	List<VoucherEntity> searchVoucherByStatus(int status);
 
-	// List<VoucherEntity> checkStt(int status);
-	
-	VoucherEntity findByCode(String code);
-	
-
+	VoucherEntity findByVoucherCode(String voucherCode);
 
 }

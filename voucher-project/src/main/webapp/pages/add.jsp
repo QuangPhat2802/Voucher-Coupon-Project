@@ -9,13 +9,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/KH/add" method="post">
-	<input type="text" id="sdt" name="sdt" value="${khachHangEntity.sdt}" readonly />
+	<form action="/customer/Add" method="post">
+	<input type="text" id="phone" name="phone" value="${customerEntity.phone}" readonly />
 	<h3>Nhap gia tri don hang</h3> 
 		<input type="text"  id="minPrice"  name="minPrice" value="${minPrice}"/> <br><br>
-		<select id="code" name="code" >
+		<select id="voucherCode" name="voucherCode" >
 				<c:forEach var="list" items="${listVoucher}">
-					<option value="${list.code}">${list.code}</option>
+					<option value="${list.voucherCode}">${list.voucherCode}</option>
 				</c:forEach> 
 		</select>
 		<br><br>

@@ -11,21 +11,13 @@ import com.demo.entity.VoucherEntity;
 
 @Repository
 public interface VoucherDao extends JpaRepository<VoucherEntity, String> {
-	
-	VoucherEntity findByCode(String code);
-	
 
-//	@Query("SELECT u FROM VoucherEntity u WHERE  u.code = :code AND u.minPrice <= :minPrice")
-//	List<VoucherEntity> findByCodeLike(@Param("code") String code, @Param("minPrice") double minPrice);
-	
-	@Query("SELECT u FROM VoucherEntity u WHERE  u.khachHangEntity.sdt = :sdt AND u.minPrice <= :minPrice")
-	List<VoucherEntity> findBySdtLike(@Param("sdt") int sdt, @Param("minPrice") double minPrice);
+	VoucherEntity findByVoucherCode(String voucherCode);
 
-	// @Query("SELECT u FROM VoucherEntity u WHERE u.status = ?1")
-	// List<VoucherEntity> findByStatusLike(int status);
+	@Query("SELECT u FROM VoucherEntity u WHERE  u.customerEntity.phone = :phone AND u.minPrice <= :minPrice")
+	List<VoucherEntity> findByPhoneLike(@Param("phone") int phone, @Param("minPrice") double minPrice);
 
 	@Query("SELECT u FROM VoucherEntity u WHERE u.status = ?1")
 	List<VoucherEntity> findByStatusLike(int status);
-	
-	
+
 }

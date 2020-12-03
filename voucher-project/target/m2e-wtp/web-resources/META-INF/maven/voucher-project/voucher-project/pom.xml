@@ -46,6 +46,11 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-search-orm -->
+		  <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.4.1.Final</version>
+        </dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-search-orm</artifactId>

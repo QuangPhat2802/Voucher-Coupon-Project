@@ -3,36 +3,30 @@ package com.demo.serviceimpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.demo.dao.DonHangDao;
-import com.demo.entity.DonHangEntity;
-import com.demo.entity.KhachHangEntity;
-import com.demo.entity.VoucherEntity;
-import com.demo.service.DonHangService;
+import com.demo.dao.OrdersDao;
+import com.demo.entity.OrdersEntity;
+import com.demo.service.OrdersService;
 
 @Transactional
 @Service
-public class DonHangServiceIMpl implements DonHangService {
+public class DonHangServiceIMpl implements OrdersService {
 
 	@Autowired
-	DonHangDao donHangDao;
-	
+	OrdersDao ordersDao;
+
 	@Override
-	public DonHangEntity addDonHang(DonHangEntity donHangEntity) {
+	public OrdersEntity addOrders(OrdersEntity donHangEntity) {
 		// TODO Auto-generated method stub
-		return donHangDao.saveAndFlush(donHangEntity);
+		return ordersDao.saveAndFlush(donHangEntity);
 	}
 
 	@Override
-	public List<DonHangEntity> getListDonHang() {
+	public List<OrdersEntity> getListOrders() {
 		// TODO Auto-generated method stub
-		return donHangDao.findAll();
+		return ordersDao.findAll();
 	}
 
-
-
-	
 }

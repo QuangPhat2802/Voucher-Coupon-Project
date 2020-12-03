@@ -24,19 +24,19 @@ public class VoucherServiceIMpl implements VoucherService {
 	}
 
 	@Override
-	public List<VoucherEntity> searchCodeBySdt(int sdt, double minPrice) {
+	public List<VoucherEntity> findVoucherCodeByPhone(int phone, double minPrice) {
 		// TODO Auto-generated method stub
-		return voucherDao.findBySdtLike(sdt, minPrice);
+		return voucherDao.findByPhoneLike(phone, minPrice);
 	}
 
 	@Override
-	public VoucherEntity addSdt(VoucherEntity voucherEntity) {
+	public VoucherEntity addPhone(VoucherEntity voucherEntity) {
 		// TODO Auto-generated method stub
 		return voucherDao.saveAndFlush(voucherEntity);
 	}
 
 	@Override
-	public List<VoucherEntity> searchStatus(int status) {
+	public List<VoucherEntity> searchVoucherByStatus(int status) {
 
 		if (status == 0) {
 
@@ -46,9 +46,9 @@ public class VoucherServiceIMpl implements VoucherService {
 	}
 
 	@Override
-	public VoucherEntity findByCode(String code) {
+	public VoucherEntity findByVoucherCode(String voucherCode) {
 
-		return voucherDao.findByCode(code);
+		return voucherDao.findByVoucherCode(voucherCode);
 	}
 
 }

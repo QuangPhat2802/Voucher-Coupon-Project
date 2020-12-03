@@ -16,166 +16,135 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "voucher_project")
+@Table(name = "voucher")
 public class VoucherEntity {
 
 	@Id
-	@Column(name = "code" , nullable = false)
-	private String code;
-	
-	@Column(name = "name" )
-	private String name;
-	
-	@Column(name = "description" )
+	@Column(name = "voucher_code", nullable = false)
+	private String voucherCode;
+
+	@Column(name = "voucher_name")
+	private String voucherName;
+
+	@Column(name = "description")
 	private String description;
-	
-	@Column(name = "quantity" )
+
+	@Column(name = "quantity")
 	private int quantity;
-	
-	@Column(name = "discount" )
+
+	@Column(name = "discount")
 	private int discount;
-	
-	@Column(name = "startDate" )
+
+	@Column(name = "startDate")
 	private Date startDate;
-	
-	@Column(name = "endDate" )
+
+	@Column(name = "endDate")
 	private Date endDate;
-	
-	@Column(name = "status" )
+
+	@Column(name = "status")
 	private int status;
-	
+
 	@Column(name = "minPrice")
 	private double minPrice;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "voucherEntity", fetch = FetchType.LAZY)
-	private Set<DonHangEntity> donHangEntity;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "sdt", referencedColumnName = "sdt")
-	private KhachHangEntity khachHangEntity;
-	
-//	@OneToOne( fetch = FetchType.LAZY)
-//	@JoinColumn(name="code")
-//	private DonHangEntity donHangEntity;
+	private Set<OrdersEntity> ordersEntity;
 
-	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "customer_phone", referencedColumnName = "customer_phone")
+	private CustomerEntity customerEntity;
+
 	public VoucherEntity() {
 		// TODO Auto-generated constructor stub
 	}
 
-
-	public String getCode() {
-		return code;
+	public String getVoucherCode() {
+		return voucherCode;
 	}
 
-
-	public void setCode(String code) {
-		this.code = code;
+	public void setVoucherCode(String voucherCode) {
+		this.voucherCode = voucherCode;
 	}
 
-
-	public String getName() {
-		return name;
+	public String getVoucherName() {
+		return voucherName;
 	}
 
-
-	public void setName(String name) {
-		this.name = name;
+	public void setVoucherName(String voucherName) {
+		this.voucherName = voucherName;
 	}
-
 
 	public String getDescription() {
 		return description;
 	}
 
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 
 	public int getQuantity() {
 		return quantity;
 	}
 
-
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
 
 	public int getDiscount() {
 		return discount;
 	}
 
-
 	public void setDiscount(int discount) {
 		this.discount = discount;
 	}
-
 
 	public Date getStartDate() {
 		return startDate;
 	}
 
-
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
-
 
 	public Date getEndDate() {
 		return endDate;
 	}
 
-
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-
 
 	public int getStatus() {
 		return status;
 	}
 
-
 	public void setStatus(int status) {
 		this.status = status;
 	}
 
-
-	public Set<DonHangEntity> getDonHangEntity() {
-		return donHangEntity;
+	public Set<OrdersEntity> getOrdersEntity() {
+		return ordersEntity;
 	}
 
-
-	public void setDonHangEntity(Set<DonHangEntity> donHangEntity) {
-		this.donHangEntity = donHangEntity;
+	public void setOrdersEntity(Set<OrdersEntity> ordersEntity) {
+		this.ordersEntity = ordersEntity;
 	}
-
 
 	public double getMinPrice() {
 		return minPrice;
 	}
 
-
-
 	public void setMinPrice(double minPrice) {
 		this.minPrice = minPrice;
 	}
 
-
-	public KhachHangEntity getKhachHangEntity() {
-		return khachHangEntity;
+	public CustomerEntity getCustomerEntity() {
+		return customerEntity;
 	}
 
-
-	public void setKhachHangEntity(KhachHangEntity khachHangEntity) {
-		this.khachHangEntity = khachHangEntity;
+	public void setcustomerEntity(CustomerEntity customerEntity) {
+		this.customerEntity = customerEntity;
 	}
 
-
-
-	
 }
