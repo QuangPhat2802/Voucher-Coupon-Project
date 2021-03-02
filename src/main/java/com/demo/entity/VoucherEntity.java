@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -17,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class VoucherEntity {
 
 	@Id
+	@NotNull(message = "please")
 	@Column(name = "voucher_code", nullable = false)
 	private String voucherCode;
 

@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(basePackages = "com.demo")
 @EntityScan(basePackages = "com.demo")
 public class SpringBootWebApplication extends SpringBootServletInitializer{
-
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootWebApplication.class, args);
 	}
